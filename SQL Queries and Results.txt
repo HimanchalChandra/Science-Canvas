@@ -1,0 +1,419 @@
+FOLLOWING ARE THE QUERY AND RESULTS EXECUTED USING MYSQL QUERIES IN MYSQL COMMAND LINE CLIENT
+1.The total number of records in this dataset.
+   Query - SELECT COUNT(SerialNo) FROM nasa_labs_facilities;
+   Result - +-----------------+
+            | COUNT(SerialNo) |
+            +-----------------+
+            |             439 |
+            +-----------------+
+
+2.Total of facilities per state.
+   Query - SELECT State, count(SerialNo) FROM nasa_labs_facilities GROUP BY State;
+   Result - +-------+-----------------+
+            | State | count(SerialNo) |
+            +-------+-----------------+
+            | AL    |             136 |
+            | AZ    |               1 |
+            | CA    |              83 |
+            | DC    |              23 |
+            | LA    |              17 |
+            | MD    |              32 |
+            | MS    |              27 |
+            | OH    |              35 |
+            | TN    |               3 |
+            | TX    |              10 |
+            | VA    |              60 |
+            | WA    |              12 |
+            +-------+-----------------+
+
+3.Latest facility
+   Query - SELECT MAX(Last_Update), Facility FROM nasa_labs_facilities;
+   Result - +------------------+---------------------------------------+
+            | MAX(Last_Update) | Facility                              |
+            +------------------+---------------------------------------+
+            | 31-03-2014       | Mach 6, High Reynolds Number Facility |
+            +------------------+---------------------------------------+
+
+4.Distribution of all active facilities per state.
+   Query - SELECT State, count(SerialNo) FROM nasa_labs_facilities WHERE Status= 'Active'  GROUP BY State;
+   Result - +-------+-----------------+
+            | State | count(SerialNo) |
+            +-------+-----------------+
+            | AL    |             118 |
+            | AZ    |               1 |
+            | CA    |              61 |
+            | DC    |              21 |
+            | LA    |              16 |
+            | MD    |              32 |
+            | MS    |              25 |
+            | OH    |              33 |
+            | TN    |               2 |
+            | TX    |               9 |
+            | VA    |              58 |
+            | WA    |              12 |
+            +-------+-----------------+
+
+5.Center names and their numbers. 
+   Query - SELECT DISTINCT Center, Phone FROM nasa_labs_facilities;
+   Result - +----------------------------------------------------+----------------+
+            | Center                                             | Phone          |
+            +----------------------------------------------------+----------------+
+            | Air Force Research Laboratory                      | 937 255-1689   |
+            | Arnold Engineering Development Center              | (931) 454-6513 |
+            | Pacific Northwest National Laboratory              | 509-372-6026   |
+            | Intelsat General                                   | 424 206-2725   |
+            | Ames Research Center                               | 650 603-9506   |
+            | Armstrong Flight Research Center                   | 661-276-2585   |
+            | Glenn Research Center                              | 216-433-9370   |
+            | Goddard Space Flight Center                        | 301 286 2520   |
+            | Jet Propulsion Lab                                 | 818.354.0701   |
+            | Johnson Space Center                               | 281.483.3219   |
+            | Langley Research Center                            | 757.864-3848   |
+            | Marshall Space Flight Center                       | 256-544-7795   |
+            | Michoud Assembly Facility                          | 504.257-2619   |
+            | NASA Aircraft Management Division                  | 202 358 4721   |
+            | Stennis Space Center                               | 601-688-1646   |
+            | Wallops Flight Facility/GSFC                       | 757-824-1120   |
+            | Orbital Satellite Manufacturing Facility - Arizona | 480 355 7275   |
+            | Raytheon Space and Airborne Systems - El Segundo   | 310-647-4171   |
+            +----------------------------------------------------+----------------+
+
+6.Distribution by year.
+   Query - SELECT Agency, Center, Facility, Occupied FROM nasa_labs_facilities WHERE OCCUPIED != 0;
+   Result - 
++----------+---------------------------------------+--------------------------------------------------------------------------------+------+
+| Agency   | Center                                | Facility                                                                       | Year |
++----------+---------------------------------------+--------------------------------------------------------------------------------+------+
+| DOD      | Air Force Research Laboratory         | Mach 6, High Reynolds Number Facility                                          | 1960 |
+| DOD      | Air Force Research Laboratory         | Subsonic Aerodynamic Research Laboratory                                       | 1985 |
+| DOD      | Air Force Research Laboratory         | Trisonic Gasdynamics Facility                                                  | 1960 |
+| DOD      | Air Force Research Laboratory         | Vertical Wind Tunnel                                                           | 1960 |
+| DOD      | Arnold Engineering Development Center | 10V Test Chamber                                                               | 1965 |
+| DOD      | Arnold Engineering Development Center | 7V Sensor Test Facility                                                        | 1994 |
+| DOD      | Arnold Engineering Development Center | Mark I Aerospace Chamber                                                       | 1963 |
+| Intelsat | Intelsat General                      | Environmental Test Lab-Shaker                                                  | 1969 |
+| Intelsat | Intelsat General                      | Environmental Test Lab-Test Chamber                                            | 1969 |
+| Intelsat | Intelsat General                      | Large Anechoic Chamber                                                         | 1969 |
+| Intelsat | Intelsat General                      | Outdoor Antenna Test Range                                                     | 1969 |
+| Intelsat | Intelsat General                      | Scanning Auger Multiprobe; Electron Microscope                                 | 1969 |
+| Intelsat | Intelsat General                      | Semiconductor Fabrication 1                                                    | 1969 |
+| Intelsat | Intelsat General                      | Semiconductor Fabrication 2                                                    | 1969 |
+| Intelsat | Intelsat General                      | Semiconductor Fabrication 3                                                    | 1969 |
+| Intelsat | Intelsat General                      | Semiconductor Fabrication 4                                                    | 1969 |
+| Intelsat | Intelsat General                      | Semiconductor Fabrication 5                                                    | 1969 |
+| Intelsat | Intelsat General                      | Semiconductor Fabrication 6                                                    | 1969 |
+| Intelsat | Intelsat General                      | Semiconductor Fabrication 7                                                    | 1969 |
+| Intelsat | Intelsat General                      | Small Anechoic Chamber                                                         | 1969 |
+| Intelsat | Intelsat General                      | SSTD                                                                           | 1969 |
+| Intelsat | Intelsat General                      | Subjective Evaluation Room                                                     | 1969 |
+| Intelsat | Intelsat General                      | System Simulation Laboratory                                                   | 1969 |
+| Intelsat | Intelsat General                      | Video System Lab                                                               | 1969 |
+| NASA 2   | Ames Research Center                  | 046 - AIRCRAFT MAINTENANCE HANGAR 2                                            | 1943 |
+| NASA 2   | Ames Research Center                  | DYNAVAC THERMAL VACUUM CHAMBER                                                 | 2010 |
+| NASA 2   | Ames Research Center                  | N204A - SPACE TECHNOLOGY BUILDING: AMES VERTICAL GUN RANGE (PAPAC)             | 1966 |
+| NASA 2   | Ames Research Center                  | N206A - 12 FOOT PRESSURE WIND TUNNEL AUXILIARIES (PAPAC)                       | 1946 |
+| NASA 2   | Ames Research Center                  | N221A - 20-G AND HUMAN POWER CENTRIFUGE (PAPAC)                                | 1964 |
+| NASA 2   | Ames Research Center                  | N229 - EXPER. AEROTHERMODYNAMIC FAC.: ELECTRIC ARC SHOCK TUBE FACILITY (PAPAC) | 1961 |
+| NASA 2   | Ames Research Center                  | N234 - THERMAL PROTECTION LAB: 2x9 INCH SUPERSONIC TURBULENT FLOW DUCT (PAPAC) | 1972 |
+| NASA 2   | Ames Research Center                  | N234 - THERMAL PROTECTION LAB: AERODYNAMIC HEATING FACILITY (PAPAC)            | 1962 |
+| NASA 2   | Ames Research Center                  | N234A - THERMAL PROTECTION LAB BOILER: STEAM VACUUM SYSTEM (PAPAC)             | 1962 |
+| NASA 2   | Ames Research Center                  | N237 - HYPERVELOCITY FREE FLIGHT AERODYNAMIC FACILITY (PAPAC)                  | 1964 |
+| NASA 2   | Ames Research Center                  | N237 - HYPERVELOCITY FREE FLIGHT GUN DEVELOPMENT FACILITY (PAPAC)              | 1964 |
+| NASA 2   | Ames Research Center                  | N238 - ARC JET LABORATORY: INTERACTION HEATING FACILITY (PAPAC)                | 1975 |
+| NASA 2   | Ames Research Center                  | N238 - ARC JET LABORATORY: PANEL TEST FACILITY (PAPAC)                         | 1972 |
+| NASA 2   | Ames Research Center                  | N240 - CENTER FOR ENGINEERING INNOVATION: FLIGHT PROCESSING CENTER             | 1982 |
+| NASA 2   | Armstrong Flight Research Center      | Bldg. 4800 - Research Development & Test Facility                              | 1954 |
+| NASA 2   | Armstrong Flight Research Center      | Bldg. 4820 - Flight Loads Laboratory                                           | 1966 |
+| NASA 2   | Armstrong Flight Research Center      | Bldg. 4840 - Research Aircraft Integration Facility                            | 1992 |
+| NASA 2   | Glenn Research Center                 | 2.2 Second Drop Tower, Bldg. 45                                                | 1958 |
+| NASA 2   | Glenn Research Center                 | 8 x 6 Supersonic Wind Tunnel, Bldgs. 39, 53 & 54                               | 1948 |
+| NASA 2   | Glenn Research Center                 | 9 X 15 Low Speed Wind Tunnel, Bldg. 39                                         | 1969 |
+| NASA 2   | Glenn Research Center                 | Aero Acoustic Propulsion Lab., (AAPL) Bldg. 145                                | 1990 |
+| NASA 2   | Glenn Research Center                 | Aerodynamics Flow Physics Facilities (ERB Complex)                             | 1942 |
+| NASA 2   | Glenn Research Center                 | Aeropropulsion Heat Transfer Technology Facilities                             | 1942 |
+| NASA 2   | Glenn Research Center                 | Combustion and Aerochemistry Technology Facilities                             | 1942 |
+| NASA 2   | Glenn Research Center                 | Complex of Thirteen Space Test Chambers (Bldg.16)                              | 1942 |
+| NASA 2   | Glenn Research Center                 | Cryogenic Propellant Tank Fac. (K-Site), #2811                                 | 1965 |
+| NASA 2   | Glenn Research Center                 | DeHavilland DHC-6 Aircraft (N607NA)                                            | 1942 |
+| NASA 2   | Glenn Research Center                 | Electric Power Lab - Vacuum Facility 5 (VF-5)                                  | 1961 |
+| NASA 2   | Glenn Research Center                 | Electric Power Lab - Vacuum Facility 6 (VF-6)                                  | 1961 |
+| NASA 2   | Glenn Research Center                 | Electro Magnetic Interference (EMI) Lab                                        | 1942 |
+| NASA 2   | Glenn Research Center                 | Icing Research Tunnel (IRT), Bldg #11                                          | 1943 |
+| NASA 2   | Glenn Research Center                 | Learjet 25 Aircraft (N616NA)                                                   | 1942 |
+| NASA 2   | Glenn Research Center                 | Materials & Structures Complex (49, 105, 106,etc.)                             | 1943 |
+| NASA 2   | Glenn Research Center                 | Plumbrook Engineering Building                                                 | 1966 |
+| NASA 2   | Glenn Research Center                 | Power Systems Facility, Bldg. 333 & 333A                                       | 1989 |
+| NASA 2   | Glenn Research Center                 | Propulsion Systems Laboratory, Bldg. 125                                       | 1972 |
+| NASA 2   | Glenn Research Center                 | Research Analysis Center, Bldg. 142                                            | 1980 |
+| NASA 2   | Glenn Research Center                 | Research Combustion Laboratory, Bldg. 35                                       | 1945 |
+| NASA 2   | Glenn Research Center                 | Space Experiments Laboratory, Bldg. 110                                        | 1993 |
+| NASA 2   | Glenn Research Center                 | Statics Test Laboratory, Bldg. 5 (ERB Complex)                                 | 1942 |
+| NASA 2   | Glenn Research Center                 | Structural Dynamics Laboratory, Bldg. 56                                       | 1949 |
+| NASA 2   | Glenn Research Center                 | Turbomachinery Technology Facilities (ERB Complex)                             | 1942 |
+| NASA 2   | Glenn Research Center                 | Zero Gravity Research Facility, (Bldg. 110)                                    | 1993 |
+| NASA 2   | Goddard Space Flight Center           | 500 Flight Dynamics Facility                                                   | 1961 |
+| NASA 2   | Goddard Space Flight Center           | 500 MILA : Merritt Island Tracking Station (MILA)                              | 1966 |
+| NASA 2   | Goddard Space Flight Center           | 500 MILA: Antenna, 4.3m S-band                                                 | 1966 |
+| NASA 2   | Goddard Space Flight Center           | 500 MILA: Antenna, 9m S-band                                                   | 1966 |
+| NASA 2   | Goddard Space Flight Center           | 500 WSC: Antenna, 10m S-band                                                   | 1977 |
+| NASA 2   | Goddard Space Flight Center           | 500 WSC: Antenna, 19m S/Ku-band                                                | 1977 |
+| NASA 2   | Goddard Space Flight Center           | 500/WSC: Antenna, 4.5m S/Ku-band                                               | 1977 |
+| NASA 2   | Goddard Space Flight Center           | 500/WSC: Data Interface System                                                 | 1977 |
+| NASA 2   | Goddard Space Flight Center           | 500: Mission Operations Center Facility                                        | 1961 |
+| NASA 2   | Goddard Space Flight Center           | 500: NASA Communications Facility (NASCOM), B. 3                               | 1961 |
+| NASA 2   | Goddard Space Flight Center           | 500: NASA Communications Facility (NASCOM), B.14                               | 1964 |
+| NASA 2   | Goddard Space Flight Center           | 500: Space-Ground Link Terminal                                                | 1977 |
+| NASA 2   | Goddard Space Flight Center           | 600: Plasma Calibration Facility                                               | 1960 |
+| NASA 2   | Goddard Space Flight Center           | 700: Cryogenic Research and Integration Facility                               | 1994 |
+| NASA 2   | Goddard Space Flight Center           | 700: Environmental Test Engineering & Integration                              | 1962 |
+| NASA 2   | Goddard Space Flight Center           | 700: Global Positioning System (GPS) Verification                              | 1963 |
+| NASA 2   | Goddard Space Flight Center           | 700: High Capacity Centrifuge (HCC)                                            | 1965 |
+| NASA 2   | Goddard Space Flight Center           | 700: Magnetic Field Component Test Facility                                    | 1963 |
+| NASA 2   | Goddard Space Flight Center           | 700: Space Environment Simulator, Facility 290                                 | 1962 |
+| NASA 2   | Goddard Space Flight Center           | 700: Space Simulation Laboratory, Building 7/10/15                             | 1962 |
+| NASA 2   | Goddard Space Flight Center           | 700: SSDIF Clean Room, B.29                                                    | 1990 |
+| NASA 2   | Goddard Space Flight Center           | Facility 225, Thermal Vacuum Chamber, B.7                                      | 1962 |
+| NASA 2   | Goddard Space Flight Center           | Sensor Data Processing Facility                                                | 1965 |
+| NASA 2   | Goddard Space Flight Center           | TDRSS Control Center                                                           | 1977 |
+| NASA 2   | Jet Propulsion Lab                    | 10-Ft Vertical Space Simulator                                                 | 1965 |
+| NASA 2   | Jet Propulsion Lab                    | 24 inch Telescope                                                              | 1965 |
+| NASA 2   | Jet Propulsion Lab                    | 25-Ft Space Simulator                                                          | 1961 |
+| NASA 2   | Jet Propulsion Lab                    | 48-inch Telescope                                                              | 1988 |
+| NASA 2   | Jet Propulsion Lab                    | Acoustics Noise Test Cell                                                      | 1961 |
+| NASA 2   | Jet Propulsion Lab                    | Atomic Oxygen Test Facility, 121-100                                           | 1965 |
+| NASA 2   | Jet Propulsion Lab                    | Computer Vision Lab.                                                           | 1948 |
+| NASA 2   | Jet Propulsion Lab                    | CTA-21                                                                         | 1955 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 12 Antenna                                                                 | 1958 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 13 Antenna                                                                 | 1958 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 14 Antenna                                                                 | 1958 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 15 Antenna                                                                 | 1958 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 16 Antenna                                                                 | 1958 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 24 Antenna                                                                 | 1994 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 43 Antenna                                                                 | 1963 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 45 Antenna                                                                 | 1963 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 46 Antenna                                                                 | 1963 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 61 Antenna                                                                 | 1964 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 63 Antenna                                                                 | 1964 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 65 Antenna                                                                 | 1964 |
+| NASA 2   | Jet Propulsion Lab                    | DSS 66 Antenna                                                                 | 1964 |
+| NASA 2   | Jet Propulsion Lab                    | Frequency Standards Laboratory                                                 | 1985 |
+| NASA 2   | Jet Propulsion Lab                    | Large Shaker Dynamics Test Facility                                            | 1964 |
+| NASA 2   | Jet Propulsion Lab                    | Lidar Facility                                                                 | 1973 |
+| NASA 2   | Jet Propulsion Lab                    | Mesa Antenna Test Facility                                                     | 1980 |
+| NASA 2   | Jet Propulsion Lab                    | Microdevices Laboratory (MDL)                                                  | 1990 |
+| NASA 2   | Jet Propulsion Lab                    | Mirror Refurbishment Building                                                  | 1992 |
+| NASA 2   | Jet Propulsion Lab                    | Optical Laboratories                                                           | 1993 |
+| NASA 2   | Jet Propulsion Lab                    | Remote Surface Lab                                                             | 1972 |
+| NASA 2   | Jet Propulsion Lab                    | Robotic Vehicle Lab                                                            | 1948 |
+| NASA 2   | Jet Propulsion Lab                    | SOLAR TEST FACILITY                                                            | 1985 |
+| NASA 2   | Jet Propulsion Lab                    | Space Flight Operations Facility                                               | 1964 |
+| NASA 2   | Jet Propulsion Lab                    | Spacecraft Assembly Facility - High Bay 1                                      | 1962 |
+| NASA 2   | Jet Propulsion Lab                    | Spacecraft Assembly Facility - High Bay 2                                      | 1962 |
+| NASA 2   | Jet Propulsion Lab                    | Thermal Vacuum Chamber 144-TV-10                                               | 1964 |
+| NASA 2   | Jet Propulsion Lab                    | Thermal-Vacuum Chamber 144-TV-7                                                | 1961 |
+| NASA 2   | Johnson Space Center                  | 11 ft. Chamber, Space Suit Dev. & Cert, EC, B-7                                | 1989 |
+| NASA 2   | Johnson Space Center                  | Chamber A, EC, B-32                                                            | 1964 |
+| NASA 2   | Johnson Space Center                  | Chamber B, EC, B-32                                                            | 1964 |
+| NASA 2   | Johnson Space Center                  | General Vibration Lab (GVL)                                                    | 2012 |
+| NASA 2   | Johnson Space Center                  | Insitu Resource Utilization Test Fac, EP, B-353                                | 1964 |
+| NASA 2   | Langley Research Center               | 16-Meter Thermal Vacuum Chamber                                                | 1963 |
+| NASA 2   | Langley Research Center               | 20-Inch Mach CF4 Tunnel                                                        | 1960 |
+| NASA 2   | Langley Research Center               | Aircraft Landing Dynamics Facility/B1262                                       | 1956 |
+| NASA 2   | Langley Research Center               | Automated Structures Assembly Lab                                              | 1945 |
+| NASA 2   | Langley Research Center               | Ceramic & Glass Laboratory (B-1237A)                                           | 1978 |
+| NASA 2   | Langley Research Center               | Compact Range Pilot Facility                                                   | 1965 |
+| NASA 2   | Langley Research Center               | Composite Material Development Laboratory/B1238B                               | 1978 |
+| NASA 2   | Langley Research Center               | Electron Beam Welding Lab                                                      | 1946 |
+| NASA 2   | Langley Research Center               | Experimental Avionics Systems Integration Lab                                  | 1951 |
+| NASA 2   | Langley Research Center               | Experimental Test Range                                                        | 1990 |
+| NASA 2   | Langley Research Center               | Fabrication Lab                                                                | 1958 |
+| NASA 2   | Langley Research Center               | Flight Research Facility                                                       | 1951 |
+| NASA 2   | Langley Research Center               | Flight Systems Integration and Test Lab/B1250                                  | 1968 |
+| NASA 2   | Langley Research Center               | Helicopter Hover Facility/647                                                  | 1977 |
+| NASA 2   | Langley Research Center               | High Heat Flux Facility                                                        | 1940 |
+| NASA 2   | Langley Research Center               | Hypersonic Propulsion Facility                                                 | 1946 |
+| NASA 2   | Langley Research Center               | Information Systems Research Facility (1)                                      | 1945 |
+| NASA 2   | Langley Research Center               | Information Systems Research Facility (2)                                      | 1945 |
+| NASA 2   | Langley Research Center               | Instrument Research Lab/1230                                                   | 1946 |
+| NASA 2   | Langley Research Center               | Intelligent Sys Res Lab/Hydrau Manipulator Testbed                             | 1945 |
+| NASA 2   | Langley Research Center               | Intravehicular Automation and Robotics Lab                                     | 1945 |
+| NASA 2   | Langley Research Center               | Jet Noise Laboratory                                                           | 1995 |
+| NASA 2   | Langley Research Center               | Landing and Impact Research Facility                                           | 1966 |
+| NASA 2   | Langley Research Center               | Low Frequency Antenna Test Facility                                            | 1965 |
+| NASA 2   | Langley Research Center               | Low Pressure Physics Laboratory                                                | 1965 |
+| NASA 2   | Langley Research Center               | Low Turbulence Pressure Tunnel                                                 | 1940 |
+| NASA 2   | Langley Research Center               | Materials Processing and Development Lab                                       | 1960 |
+| NASA 2   | Langley Research Center               | Metal Technology Development Lab/1232A                                         | 1946 |
+| NASA 2   | Langley Research Center               | Micometeroid/LDEF Analysis Laboratory                                          | 1965 |
+| NASA 2   | Langley Research Center               | National Transonic Facility                                                    | 1982 |
+| NASA 2   | Langley Research Center               | Nondestructive Evaluation Lab                                                  | 1988 |
+| NASA 2   | Langley Research Center               | Nozzle Test Chamber                                                            | 1952 |
+| NASA 2   | Langley Research Center               | Productivity Enhancement Lab (B-1232A)                                         | 1946 |
+| NASA 2   | Langley Research Center               | Quality Assurance & Inspection Lab/1232A                                       | 1946 |
+| NASA 2   | Langley Research Center               | Radiation Physics Computer Laboratory                                          | 1965 |
+| NASA 2   | Langley Research Center               | Research Laboratory                                                            | 1967 |
+| NASA 2   | Langley Research Center               | Semi-Anecho Electromagnetic Comp Test Complex/B1220                            | 1945 |
+| NASA 2   | Langley Research Center               | Structural Dynamics Research Lab                                               | 1963 |
+| NASA 2   | Langley Research Center               | Structures and Materials Lab                                                   | 1940 |
+| NASA 2   | Langley Research Center               | Thermal Structures Lab                                                         | 1960 |
+| NASA 2   | Langley Research Center               | Transonic Dynamics Tunnel                                                      | 1960 |
+| NASA 2   | Langley Research Center               | Unitary Plan Wind Tunnel                                                       | 1952 |
+| NASA 2   | Marshall Space Flight Center          | AB Communications Facility, Bldg. 4207                                         | 1962 |
+| NASA 2   | Marshall Space Flight Center          | Composites Development Facility 4707                                           | 1956 |
+| NASA 2   | Marshall Space Flight Center          | Cosmic Ray Emulsion Laboratory 4481                                            | 1991 |
+| NASA 2   | Marshall Space Flight Center          | EB Audio Reverberant Facility 4477                                             | 1991 |
+| NASA 2   | Marshall Space Flight Center          | EB Electrical Power Systems Test Fac 4475                                      | 1964 |
+| NASA 2   | Marshall Space Flight Center          | EB Marshall Avionics Sys. Testbed (MAST) 4487                                  | 1963 |
+| NASA 2   | Marshall Space Flight Center          | EB Precision Optical Facility 4487                                             | 1968 |
+| NASA 2   | Marshall Space Flight Center          | EB Radio Frequency Development Lab 4189                                        | 1957 |
+| NASA 2   | Marshall Space Flight Center          | EB Solar Array Test Facility 4475                                              | 1964 |
+| NASA 2   | Marshall Space Flight Center          | EB Straylight Facility 4487                                                    | 1957 |
+| NASA 2   | Marshall Space Flight Center          | EB Doppler Lidar Facility 4467                                                 | 1957 |
+| NASA 2   | Marshall Space Flight Center          | EB LAB Anechoic Test Chamber 4190                                              | 1965 |
+| NASA 2   | Marshall Space Flight Center          | ED Air Flow Turbine Test Facility 4777                                         | 1985 |
+| NASA 2   | Marshall Space Flight Center          | ED Coldflow R & D Test Complex 4776                                            | 1985 |
+| NASA 2   | Marshall Space Flight Center          | ED Liquid Rocket Engine Air Flow Fac 4777                                      | 1985 |
+| NASA 2   | Marshall Space Flight Center          | ED Liquid/Solid Rocket Eng Water Flow Fac 4776                                 | 1985 |
+| NASA 2   | Marshall Space Flight Center          | ED Pump Test Equipment Facility 4777                                           | 1995 |
+| NASA 2   | Marshall Space Flight Center          | ED Solid Rocket Engine Air Flow Fac 4777                                       | 1985 |
+| NASA 2   | Marshall Space Flight Center          | ED Water Flow Inducer Test Loop 4777                                           | 1985 |
+| NASA 2   | Marshall Space Flight Center          | EH Advanced Bonding Technology Laboratory 4707                                 | 1956 |
+| NASA 2   | Marshall Space Flight Center          | EH Ambient & High Pressure LOX/GOX Facility 4623                               | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EH Ceramics Coatings & High Temp Mat.Lab 4612                                  | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EH Computer Aided Design (CAD)Room 4708                                        | 1989 |
+| NASA 2   | Marshall Space Flight Center          | EH Computerized Data Base System 4612                                          | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EH Environmental Replacement Tech. Lab 4707                                    | 1956 |
+| NASA 2   | Marshall Space Flight Center          | EH Foam Formulation Laboratory 4739                                            | 1956 |
+| NASA 2   | Marshall Space Flight Center          | EH Frictional Heating Test System 4623                                         | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EH Hazardous Machining Facility 4759                                           | 1958 |
+| NASA 2   | Marshall Space Flight Center          | EH Hazardous Tribological Test Facility 4643                                   | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EH Heat Treat Shop 4704                                                        | 1958 |
+| NASA 2   | Marshall Space Flight Center          | EH High-Temperature Heat Treating Fac 4767                                     | 1958 |
+| NASA 2   | Marshall Space Flight Center          | EH Inert Propellant Development Lab 4767                                       | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EH Low Pressure Flammability Test Sys. 4623                                    | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EH Mechanical & Corrosion Testing 4612                                         | 1961 |
+| NASA 2   | Marshall Space Flight Center          | EH Metallurgical Diagnostics Laboratory 4612                                   | 1961 |
+| NASA 2   | Marshall Space Flight Center          | EH Metals Processing Facility 4711                                             | 1958 |
+| NASA 2   | Marshall Space Flight Center          | EH Plasma Arc Metal Cutting Facility 4738                                      | 1958 |
+| NASA 2   | Marshall Space Flight Center          | EH Robotic Welding Facility 4707                                               | 1956 |
+| NASA 2   | Marshall Space Flight Center          | EH Robotic Workcell 4707                                                       | 1956 |
+| NASA 2   | Marshall Space Flight Center          | EH Rubber Fabrication Laboratory 4612                                          | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EH Sheet Metal Assembly & Machine Shop 4705                                    | 1958 |
+| NASA 2   | Marshall Space Flight Center          | EH Spray-On Foam Insulation (SOFI) Lab 4707                                    | 1956 |
+| NASA 2   | Marshall Space Flight Center          | EH SRB-TPS (Thermal Protection Sys) Dev. 470                                   | 1956 |
+| NASA 2   | Marshall Space Flight Center          | EH Surface Treatment Facility 4760                                             | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EH Vacuum Plasma Spray Facility 4707                                           | 1956 |
+| NASA 2   | Marshall Space Flight Center          | EH High Pres. Ignit. Promoted Combust.Test System                              | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EI Manned Habitat ECLSS Test Facility 4755                                     | 1985 |
+| NASA 2   | Marshall Space Flight Center          | EI Space Systems Integration and Test Facility 4                               | 1992 |
+| NASA 2   | Marshall Space Flight Center          | EI MSFC Electromagnetic Interference (EMI) Test Fa                             | 1995 |
+| NASA 2   | Marshall Space Flight Center          | EL Ground Control Experiment Laboratory 4708                                   | 1958 |
+| NASA 2   | Marshall Space Flight Center          | EL Systems and Payloads Test Facilities 4708                                   | 1958 |
+| NASA 2   | Marshall Space Flight Center          | EL X-Ray & Cryogenic Facility (XRCF), 4718                                     | 1991 |
+| NASA 2   | Marshall Space Flight Center          | EM Space Environmental Effects Facility 4605                                   | 1970 |
+| NASA 2   | Marshall Space Flight Center          | EM Bearing Test Facility, Bldg 4711                                            | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EM Chemistry Laboratories, Building 4612                                       | 1957 |
+| NASA 2   | Marshall Space Flight Center          | EM Environmental Gas/Toxic Offgassing Lab, Bldg 46                             | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EM Hydrogen (H2) Test Facility 4628                                            | 1961 |
+| NASA 2   | Marshall Space Flight Center          | EM Impact Testing Facility 4571, 4612                                          | 2005 |
+| NASA 2   | Marshall Space Flight Center          | EM Tribology Test Laboratory, Building 4711                                    | 1960 |
+| NASA 2   | Marshall Space Flight Center          | EM-20 Computed Tomography Facility 4707                                        | 1985 |
+| NASA 2   | Marshall Space Flight Center          | EM-20 Acoustic Emission Facility 4711                                          | 1992 |
+| NASA 2   | Marshall Space Flight Center          | EM-20 Backscatter Radiography Facility 4711/4707                               | 2002 |
+| NASA 2   | Marshall Space Flight Center          | EM-20 Digital X-ray Laminography 4711                                          | 2006 |
+| NASA 2   | Marshall Space Flight Center          | EM-20 Shearography Facility 4711                                               | 1992 |
+| NASA 2   | Marshall Space Flight Center          | EM-20 Terahertz Imaging Facility 4711                                          | 2003 |
+| NASA 2   | Marshall Space Flight Center          | EM-20 Thermography Facility 4711                                               | 1992 |
+| NASA 2   | Marshall Space Flight Center          | EO Huntsville Operations Support Center 4663                                   | 1959 |
+| NASA 2   | Marshall Space Flight Center          | EO UDC/ Express Rack/ Express Pallet 4612                                      | 1988 |
+| NASA 2   | Marshall Space Flight Center          | EP Cold Flow Position 4670                                                     | 1965 |
+| NASA 2   | Marshall Space Flight Center          | EP Data Recording and Control Facility 4674                                    | 1964 |
+| NASA 2   | Marshall Space Flight Center          | EP Data Recording Facility 4583                                                | 1957 |
+| NASA 2   | Marshall Space Flight Center          | EP Hot Gas Test Facility 4554                                                  | 1976 |
+| NASA 2   | Marshall Space Flight Center          | EP Hydrocarbon (HC) Engine Test Fac 4696                                       | 1963 |
+| NASA 2   | Marshall Space Flight Center          | EP Propulsion Technology Test Facility 4670                                    | 1965 |
+| NASA 2   | Marshall Space Flight Center          | EP Test Cells 4583                                                             | 1957 |
+| NASA 2   | Marshall Space Flight Center          | EP Test Facility (TF116) 4540                                                  | 1964 |
+| NASA 2   | Marshall Space Flight Center          | EP Test Facility (TS300) 4530                                                  | 1966 |
+| NASA 2   | Marshall Space Flight Center          | EP Transient Pressure Test Facility 4515                                       | 1987 |
+| NASA 2   | Marshall Space Flight Center          | EP Mechanisms Development Facility 4656                                        | 1965 |
+| NASA 2   | Marshall Space Flight Center          | EP Test Facility (TF500) 4522                                                  | 1966 |
+| NASA 2   | Marshall Space Flight Center          | ES BATSE Operations & Data Analysis Lab 4481                                   | 1990 |
+| NASA 2   | Marshall Space Flight Center          | ES Dist Active Archive Center 917 Expl. Blvd.                                  | 1991 |
+| NASA 2   | Marshall Space Flight Center          | ES Earth Science & Appl.Computer Facility 4492                                 | 1991 |
+| NASA 2   | Marshall Space Flight Center          | ES Laboratory for Structural Biology 4484                                      | 1994 |
+| NASA 2   | Marshall Space Flight Center          | ES Low Energy Ion Facility 4481                                                | 1974 |
+| NASA 2   | Marshall Space Flight Center          | ES Plasma Wind Tunnel 4481                                                     | 1991 |
+| NASA 2   | Marshall Space Flight Center          | ES Solar Magnetograph Facility 4347                                            | 1950 |
+| NASA 2   | Marshall Space Flight Center          | ET Acoustic Test Facility 4619                                                 | 1959 |
+| NASA 2   | Marshall Space Flight Center          | ET Component/System Quasi-Static Load Fac 4619                                 | 1959 |
+| NASA 2   | Marshall Space Flight Center          | ET Flight Environmental Test Facility 4619                                     | 1962 |
+| NASA 2   | Marshall Space Flight Center          | ET WTC - Wind Tunnel Complex 4732                                              | 1968 |
+| NASA 2   | Marshall Space Flight Center          | ET WTC - 14-Inch Trisonic Wind Tunnel 4732                                     | 1968 |
+| NASA 2   | Marshall Space Flight Center          | EV 400-Ft. Antenna Test Range 4194                                             | 1962 |
+| NASA 2   | Marshall Space Flight Center          | EV Engine Hardware Simulation Laboratory, 4436                                 | 1988 |
+| NASA 2   | Marshall Space Flight Center          | EV Flight Simulation Lab 4476                                                  | 1963 |
+| NASA 2   | Marshall Space Flight Center          | EV Battery Test Laboratory 4475                                                | 1964 |
+| NASA 2   | Marshall Space Flight Center          | EV Contact Dynamics Simulation Lab (6DOF) 4663                                 | 1980 |
+| NASA 2   | Marshall Space Flight Center          | EV Flight Robotics Laboratory (Flat Floor) 4619                                | 1983 |
+| NASA 2   | Marshall Space Flight Center          | EV LAB 1/2 Mile Antenna Test Range 4194                                        | 1976 |
+| NASA 2   | Marshall Space Flight Center          | Fiber Placement Fac 4707                                                       | 1956 |
+| NASA 2   | Marshall Space Flight Center          | Filament Winding Lab 4707                                                      | 1956 |
+| NASA 2   | Marshall Space Flight Center          | Low Gravity Materials Science Facility 4550                                    | 1991 |
+| NASA 2   | Marshall Space Flight Center          | Neutral Buoyancy Facility 4705                                                 | 1968 |
+| NASA 2   | Marshall Space Flight Center          | Propulsion Research and Development Laboratory                                 | 2005 |
+| NASA 2   | Marshall Space Flight Center          | Subscale Rocket Motor Processing Fac 4707                                      | 1956 |
+| NASA 2   | Marshall Space Flight Center          | Vacuum Drop Tube Facility 4550                                                 | 1965 |
+| NASA 2   | Michoud Assembly Facility             | Chemical Cleaning Facility                                                     | 1943 |
+| NASA 2   | Michoud Assembly Facility             | Component Ablator Facility Mix Room                                            | 1985 |
+| NASA 2   | Michoud Assembly Facility             | Component Ablator Facility SLA Spray Preparation Area                          | 1985 |
+| NASA 2   | Michoud Assembly Facility             | Component Ablator Facility SLA Spray Room                                      | 1985 |
+| NASA 2   | Michoud Assembly Facility             | Friction Stir Welding Facility                                                 | 1943 |
+| NASA 2   | Michoud Assembly Facility             | Harness Fabrication Facility                                                   | 1943 |
+| NASA 2   | Michoud Assembly Facility             | Heat Treating Facility                                                         | 1943 |
+| NASA 2   | Michoud Assembly Facility             | High Bay Facility                                                              | 1982 |
+| NASA 2   | Michoud Assembly Facility             | LH2 Ablator Spray Facility                                                     | 1980 |
+| NASA 2   | Michoud Assembly Facility             | Machine Shop Facility                                                          | 1943 |
+| NASA 2   | Michoud Assembly Facility             | Major Component Cleaning Facility                                              | 1943 |
+| NASA 2   | Michoud Assembly Facility             | Port Michoud Facility                                                          | 1963 |
+| NASA 2   | Michoud Assembly Facility             | Precision Cleaning Facility                                                    | 1943 |
+| NASA 2   | Michoud Assembly Facility             | Riveting Facility                                                              | 1943 |
+| NASA 2   | Michoud Assembly Facility             | Thermal Protection System Area                                                 | 1963 |
+| NASA 2   | Michoud Assembly Facility             | Vertical Assembly Facility                                                     | 1963 |
+| NASA 2   | Stennis Space Center                  | A Complex Test Control Center (TCC) #4110                                      | 1966 |
+| NASA 2   | Stennis Space Center                  | B Complex Test Control Center (TCC) #4210                                      | 1966 |
+| NASA 2   | Stennis Space Center                  | Barge, Liquid Hydrogen (3 each)                                                | 1965 |
+| NASA 2   | Stennis Space Center                  | Barge, Liquid Oxygen (6 each)                                                  | 1965 |
+| NASA 2   | Stennis Space Center                  | Canals, Lock & Dock System #0036,2310,2311,2317                                | 1966 |
+| NASA 2   | Stennis Space Center                  | Communications Building #1201                                                  | 1965 |
+| NASA 2   | Stennis Space Center                  | Cryogenics Docks #0008                                                         | 1965 |
+| NASA 2   | Stennis Space Center                  | Data Acquisition Facility (DAF) #4995                                          | 1966 |
+| NASA 2   | Stennis Space Center                  | Electrical Distribution System #0010                                           | 1964 |
+| NASA 2   | Stennis Space Center                  | Emergency Power Generating System #4400                                        | 1966 |
+| NASA 2   | Stennis Space Center                  | Engine Processing Building #3202                                               | 1965 |
+| NASA 2   | Stennis Space Center                  | High Pressure Gas Facility #0041,3305,6,9,10,11                                | 1966 |
+| NASA 2   | Stennis Space Center                  | High Pressure Industrial Water Plant #4400                                     | 1966 |
+| NASA 2   | Stennis Space Center                  | Hydrogen Transfer Facility #3415                                               | 1965 |
+| NASA 2   | Stennis Space Center                  | Industrial Water Reservoir #4325                                               | 1966 |
+| NASA 2   | Stennis Space Center                  | Measurement Standards & Calibration Lab #8100                                  | 1966 |
+| NASA 2   | Stennis Space Center                  | Propellant Transfer & Storage Facility #3414                                   | 1965 |
+| NASA 2   | Stennis Space Center                  | Push Boat                                                                      | 1965 |
+| NASA 2   | Stennis Space Center                  | Repair, Fab. & Fluid Component Proc. #2201,2205,5A                             | 1964 |
+| NASA 2   | Stennis Space Center                  | Science Laboratory #8110                                                       | 1966 |
+| NASA 2   | Stennis Space Center                  | Sensor Laboratory #1105                                                        | 1966 |
+| NASA 2   | Stennis Space Center                  | Test Facility E-1 #4050                                                        | 1992 |
+| NASA 2   | Stennis Space Center                  | Test Facility E-2 #4001                                                        | 1994 |
+| NASA 2   | Stennis Space Center                  | Test Facility H-1 #5001                                                        | 1995 |
+| NASA 2   | Stennis Space Center                  | Test Operations Bldg. E Complex #4010                                          | 1991 |
+| NASA 2   | Stennis Space Center                  | Test Stand A-1 #4120                                                           | 1967 |
+| NASA 2   | Wallops Flight Facility/GSFC          | Launch Range                                                                   | 1959 |
+| NASA 2   | Wallops Flight Facility/GSFC          | Main Base Laboratories and Shops                                               | 1959 |
+| NASA 2   | Wallops Flight Facility/GSFC          | McMurdo Ground Station (MGS)                                                   | 1994 |
+| NASA 2   | Wallops Flight Facility/GSFC          | Meteorological Facilities and ASRF                                             | 1959 |
+| NASA 2   | Wallops Flight Facility/GSFC          | Mobile Range Systems                                                           | 1960 |
+| NASA 2   | Wallops Flight Facility/GSFC          | National Scientific Balloon Facility                                           | 1977 |
+| NASA 2   | Wallops Flight Facility/GSFC          | Poker Flat Research Range & SAR Facility                                       | 1970 |
+| NASA 2   | Wallops Flight Facility/GSFC          | Wallops Orbital Tracking Station                                               | 1960 |
+| NASA 2   | Wallops Flight Facility/GSFC          | WFF Research Airport                                                           | 1958 |
+| NASA 2   | Wallops Flight Facility/GSFC          | White Sands Missile Range                                                      | 1964 |
++----------+---------------------------------------+--------------------------------------------------------------------------------+------+
